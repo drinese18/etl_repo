@@ -1,0 +1,43 @@
+{
+  "name" : "us-definition",
+  "jobMode" : "VISUAL",
+  "description" : "",
+  "role" : "arn:aws:iam::180359220429:role/service-role/AWSGlueServiceRole",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-180359220429-us-east-1/scripts/us-definition.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--enable-metrics" : "true",
+    "--enable-spark-ui" : "true",
+    "--extra-py-files" : "s3://aws-glue-studio-transforms-510798373988-prod-us-east-1/recipe-transforms/aws-glue-python-recipe-transforms.zip",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-180359220429-us-east-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "false",
+    "--enable-observability-metrics" : "true",
+    "--enable-glue-datacatalog" : "true",
+    "--enable-continuous-cloudwatch-log" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--job-language" : "python",
+    "--TempDir" : "s3://aws-glue-assets-180359220429-us-east-1/temporary/",
+    "--extra-jars" : "s3://aws-glue-studio-transforms-510798373988-prod-us-east-1/recipe-transforms/aws-glue-scala-recipe-transforms.jar"
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 10,
+  "timeout" : 2880,
+  "maxCapacity" : 10.0,
+  "glueVersion" : "4.0",
+  "numberOfWorkers" : 10,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "codeGenConfigurationNodes" : "{\"node-1715050112573\":{\"S3DirectTarget\":{\"AutoDataQuality\":{\"IsEnabled\":false},\"Compression\":\"none\",\"Format\":\"csv\",\"Inputs\":[\"node-1715050077142\"],\"Name\":\"eligible\",\"PartitionKeys\":[],\"Path\":\"s3://jw-wford-development/data-outputs/\",\"SchemaChangePolicy\":{\"EnableUpdateCatalog\":false}}},\"node-1715050077142\":{\"Join\":{\"Columns\":[{\"From\":\"node-1715050007332\",\"Keys\":[[\"ric\"]]},{\"From\":\"node-1715049933397\",\"Keys\":[[\"ric\"]]}],\"Inputs\":[\"node-1715050007332\",\"node-1715049933397\"],\"JoinType\":\"equijoin\",\"Name\":\"Join\"}},\"node-1715049875820\":{\"CatalogSource\":{\"Database\":\"development\",\"Name\":\"full\",\"Table\":\"ref_data\"}},\"node-1715050007332\":{\"Recipe\":{\"Inputs\":[\"node-1715049875820\"],\"Name\":\"us-universe-definition\",\"RecipeReference\":{\"RecipeArn\":\"arn:aws:databrew:us-east-1:180359220429:recipe/eligible\",\"RecipeVersion\":\"2.0\"}}},\"node-1715049933397\":{\"CatalogSource\":{\"Database\":\"development\",\"Name\":\"pricing\",\"Table\":\"pricing_data\"}}}",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "etl_repo",
+    "branch" : "feature/Test",
+    "folder" : "us-definition"
+  }
+}
