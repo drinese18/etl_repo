@@ -31,9 +31,22 @@ validator = context.get_validator(
     expectation_suite_name=expectation_suite_name,
 )
 
-validation_result = validator.validate()
+validation_results = validator.validate()
 
+failed_expectations = []
+for validation_result in validation_results.results:
+    if not validation_result.success:
+        failed_expectations.append(validation_result)
+
+for expectation in failed_expectations:
+    if expectation.expectation_config.expectation_type == "expect_column_values_to_be_in_set":
+        column_name = expectation.expectation_config.kwargs["column"]
+        unexpected_indices = expectation.result["partial_unexpected_list"]
+        filtered_df = df[df['exchange_code'] != unexpected_indices[0]]
+        #print(filtered_df)
 
 # Print the Expectation Suite
 print(suite)
-print(validation_result)
+print(validation_results)
+print(unexpected_indices[0])
+print(filtered_df)
