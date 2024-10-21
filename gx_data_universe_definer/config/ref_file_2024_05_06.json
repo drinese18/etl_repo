@@ -1,0 +1,59 @@
+{
+  "data_asset_type": null,
+  "expectation_suite_name": "ref_file_2024_05_06",
+  "expectations": [
+    {
+      "expectation_type": "expect_table_row_count_to_be_between",
+      "kwargs": {
+        "max_value": 6,
+        "min_value": 6
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_table_columns_to_match_set",
+      "kwargs": {
+        "column_set": [
+          "ref_id",
+          "currency_code",
+          "exchange_code",
+          "ric",
+          "listing_status",
+          "effective_date"
+        ]
+      },
+      "meta": {}
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "kwargs": {
+        "column": "exchange_code",
+        "value_set": [
+          "XNGS",
+          "XNYS"
+        ]
+      },
+      "meta": {}
+    }
+  ],
+  "ge_cloud_id": null,
+  "meta": {
+    "citations": [
+      {
+        "citation_date": "2024-10-15T03:16:34.996216Z",
+        "comment": "Created by effective Rule-Based Profiler of OnboardingDataAssistant with the configuration included.\n"
+      },
+      {
+        "batch_request": {
+          "data_asset_name": "ref_file_2024_05_06.csv",
+          "data_connector_name": "default_inferred_data_connector_name",
+          "datasource_name": "reference_data",
+          "limit": 1000
+        },
+        "citation_date": "2024-10-15T03:20:25.438213Z",
+        "comment": "Created suite added via CLI"
+      }
+    ],
+    "great_expectations_version": "0.18.21"
+  }
+}
